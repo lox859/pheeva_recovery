@@ -1,0 +1,15 @@
+{
+  "name": "pheeva_recovery",
+  "version": "1.0.0",
+  "description": "Pheeva Wallet Recovery Tool",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "mithril": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "William Gay & Malik Locke",
+  "license": "ISC"
+}
