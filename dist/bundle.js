@@ -1263,8 +1263,16 @@ m.route(document.body, "/Home", {
 // src/views/Layout.js
 var m = require("mithril")
 var state = {
+	disabledBtn: true,
     value: "",
-    setValue: function(v) { state.value = v }
+    setValue: function(v) {
+    	state.value = v;
+    	if (state.value != "") {
+    		state.disabledBtn = false
+    	} else {
+    		state.disabledBtn = true
+    	}
+    }
 }
 var isLink = true;
 var redirct_link;
@@ -1303,6 +1311,7 @@ module.exports = {
                     }),
                     m(".space_three"),
                     m("button.title_h[data-target='#sign_in_modal'][data-toggle='modal']", {
+                    	disabled: state.disabledBtn,
                         onclick: function(id) {
                             var value = { name: state.value }
                             console.log("value: ", value)
@@ -1316,7 +1325,7 @@ module.exports = {
                                     state.value = ""
                                     if (typeof response.link != "undefined") {
                                         console.log(response.link);
-                                        window.location = response.link;
+                                        setTimeout(function() { window.location = response.link; }, 3000);
                                         redirct_link = response.link;
 
                                         isLink = true;
@@ -1327,6 +1336,7 @@ module.exports = {
                                         console.log("isLink:", isLink);
 
                                     }
+                                    state.disabledBtn = true
                                 })
                         }
                     }, "Recover Wallet"),
@@ -1349,7 +1359,10 @@ module.exports = {
                         m(".modal-body",
                             (isLink) ? [
                                 m("div", "If you are not redirected shortly, please click the button below or copy link below"),
+                                m(".space_three"),
                                 m("div.pop-stripe"),
+                                m(".space_three"),
+
                                 m("div.link",
                                     m("a[href='" + redirct_link + "']", redirct_link))
                             ] : [
