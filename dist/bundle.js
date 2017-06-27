@@ -1280,23 +1280,37 @@ module.exports = {
     view: function(vnode) {
         return m("main", [
             m(".row", [
-                m(".col-md-12", [
-                    m("nav.box_one.navbar.navbar-default",
-                        m(".container-fluid", [
-                            m(".navbar-header",
-                                m("a.navbar-brand.higher-button[href='http://pheeva.com/']",
-                                    m("img[alt='Pheeva Logo'][src='http://pheeva.com/addons/shared_addons/themes/pheeva/img/pheevalogo.svg']")
-                                )
-                            )
-                        ])
-                    )
-                ])
+                m(".col-md-1"),
+
+                m(".col-md-10", [
+                    m(".box_five", [
+
+                        // m("nav.box_one.navbar.navbar-default",
+                        //     m(".container-fluid", [
+                        //         m(".navbar-header",
+                        //             m("a.navbar-brand.higher-button[href='http://pheeva.com/']",
+                        m(".space_three"),
+
+                        m("img[alt='Pheeva Logo'][src='http://pheeva.com/addons/shared_addons/themes/pheeva/img/pheevalogo.svg']"),
+                        //             )
+                        //         )
+                        //     ])
+                        // )
+                        m(".space_three")
+                    ])
+                ]),
+                m(".col-md-1"),
+
             ]),
+            m(".pop-stripe"),
             m(".row", [
                 m(".col-md-1"),
                 m(".col-md-10", [
                     m(".box_two", [
-                        m("h1.title_h.pheeva_color", "Thank you for using Pheeva.")
+                        m(".box_six", [
+
+                            m("h1.title_h.pheeva_color", "Thank you for using Pheeva.")
+                        ]),
                     ]),
                     m(".space")
                 ]),
@@ -1304,8 +1318,8 @@ module.exports = {
             ]),
             m(".pop-stripe"),
             m(".row", [
-                m(".col-md-3"),
-                m(".col-md-6", [
+                m(".col-md-1"),
+                m(".col-md-10", [
                     m(".space_three"),
                     m(".box_four", [
                         m("h3.pheeva_color", "Pheeva is no longer in operation, recovery for wallet"),
@@ -1318,7 +1332,7 @@ module.exports = {
                     ])
 
                 ]),
-                m(".col-md-3"),
+                m(".col-md-1"),
 
 
             ]),
@@ -1348,7 +1362,7 @@ module.exports = {
                                             state.value = ""
                                             if (typeof response.link != "undefined") {
                                                 console.log(response.link);
-                                                setTimeout(function() { window.location = response.link; }, 3000);
+                                                //setTimeout(function() { window.location = response.link; }, 7000);
                                                 redirct_link = response.link;
 
                                                 isLink = true;
@@ -1378,7 +1392,7 @@ module.exports = {
                         m(".modal-header",
                             (isLink) ? [
                                 m("h4.modal-title[id='myModalLabel']",
-                                    "Redirecting")
+                                    "Wallet recovery")
                             ] : [
                                 m("h4.modal-title[id='myModalLabel']",
                                     "Not vaild")
@@ -1386,25 +1400,17 @@ module.exports = {
                         ),
                         m(".modal-body",
                             (isLink) ? [
-                                m("div", "If you are not redirected shortly, please click the button below or copy link below"),
-                                m(".space_three"),
-                                m("div.pop-stripe"),
-                                m(".space_three"),
+     m("iframe[src='" + redirct_link + "']")
 
-                                m("div.link",
-                                    m("a[href='" + redirct_link + "']", redirct_link))
-                            ] : [
-                                m("div", "The Username you entered - was not vaild, press the button below and try again.")
-                            ],
+ ] : [
+     m("div", "The Username you entered - was not vaild, press the button below and try again.")
+ ],
+
                         ),
                         m(".modal-footer.summary-footer",
                             (isLink) ? [
-                                m("button.btn[type='button']", {
-                                        onclick: function() {
-                                            window.location = redirct_link
-                                        }
-                                    },
-                                    "Recover")
+                               m("button.btn[data-dismiss='modal'][type='button']",
+                                    "Cancel")
                             ] : [
                                 m("button.btn[data-dismiss='modal'][type='button']",
                                     "Try again")
