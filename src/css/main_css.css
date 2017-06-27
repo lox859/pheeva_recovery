@@ -4,19 +4,36 @@
     height: 1px;
     background-color: #eee;
 }
-
+.link{
+	overflow-wrap: break-word;
+}
 .pheeva_color{
     color: #C60006 !important;
 }
-
+.space{
+	padding-top: 46px;
+	padding-bottom: 0px;
+}
+.space_two{
+	padding-top: 18px;
+	padding-bottom: 0px;
+}
+.space_three{
+	padding-top: 10px;
+	padding-bottom: 0px;
+}
 .box_one {
     padding-left: 249px;
     padding-bottom: 12px !important;
 }
-
-.box_two {
+.box_two{
     padding: 249px;
     padding-top: 46px !important;
+    padding-bottom: 0px !important;
+}
+.box_four {
+    padding: 249px;
+    padding-top: 0px !important;
     padding-bottom: 46px !important;
 }
 
@@ -25,10 +42,11 @@
 }
 .box_three {
     padding: 249px;
-    padding-top: 2px !important;
+    padding-top: 10px !important;
     padding-bottom: 0px !important;
 }
 input{
+	padding-left: 8px;
 	border-style: solid;
 	border-width: 2px;
 	border-color: #C7C7C7;
