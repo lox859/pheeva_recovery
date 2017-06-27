@@ -1,19 +1,19 @@
 // var m = require("mithril")
 
 // m.mount("form", [
-// 	m("input['type=text', 'name=identifier']"),
-// 	m("input['type=submit']", {
-// 	onclick: function(identifier) {
-// 		var value = "{name = " + identifier + "}"
-// 		return m.request({
+//  m("input['type=text', 'name=identifier']"),
+//  m("input['type=submit']", {
+//  onclick: function(identifier) {
+//      var value = "{name = " + identifier + "}"
+//      return m.request({
 //             method: "POST",
 //             url: "https://f5a15j7due.execute-api.us-east-1.amazonaws.com/latest/getLink",
 //             data: value
 //         })
 //         .then(function(response) {
-//         	window.location(response.link)
+//          window.location(response.link)
 //         })
-// 	}
+//  }
 // })])
 
 // src/views/Layout.js
@@ -40,17 +40,16 @@ module.exports = {
                 m("h1.title_h.pheeva_color", "Thank you for using Pheeva."),
             ]),
             m(".space"),
-            m("div.pop-stripe"),
-            m(".box_two", [
-                m("h1.title_h.pheeva_color", "Recovery"),
-            ]),
-            m(".space"),
+            m(".pop-stripe"),
+            m(".space_three"),
             m(".box_four", [
-                m("h3.pheeva_color", "Pheeva is no longer in operation"),
+                m("h3.pheeva_color", "Pheeva is no longer in operation, recovery for wallet"),
                 m(".space_two"),
-                m("span", "When the Pheeva project was first discontiuned over a year ago. We sent out emails to all who used Pheeva. So, you all could recover your bitcoin. Thank you for you support of Pheeva Wallet. We are sorry to inform you that "),
-                m("span.pheeva_color", "Pheeva Hot Wallet"),
-                m("span", " is no longer in operation. We understand that, due to the increasing price of bitcoin, many are trying to recover bitcoin from old wallets. To aid in this process, we have created a simple wallet recovery tool,which is linked below. To recover your bitcoin, enter your username and then simply click the button below labeled \“Recvoer Wallet\"")
+                m("span", "We appreciate your support of "),
+                m("span.pheeva_color", "Pheeva Hot Wallet."),
+                m("span", " Unfortunately we discontinued our wallet service over a year ago. Throughout our closing process, we sent emails to all customers detailing the preperations that should be taken to to ensure the saftey of their funds. We understand that due to the increasing price of bitcoin many are searching old wallets to recover funds. To aid in this process, we have created a simple recovery tool for "),
+                m("span.pheeva_color", "Pheeva Hot Wallets"),
+                m("span", " To recover your wallet, enter your username or email adress below and click \“Recvoer Wallet.\"")
             ]),
             m(".box_three.title_h", [
                 m("form", [
@@ -113,17 +112,18 @@ module.exports = {
                                 m("div", "The Username you entered - was not vaild, press the button below and try again.")
                             ],
                         ),
-                        m(".modal-footer.summary-footer", 
-							(isLink) ? [
-                             m("button.btn[type='button']", {
-                                    onclick: function() {
-                                        window.location = redirct_link
-                                    }
-                                },
-                                "Recover")
+                        m(".modal-footer.summary-footer",
+                            (isLink) ? [
+                                m("button.btn[type='button']", {
+                                        onclick: function() {
+                                            window.location = redirct_link
+                                        }
+                                    },
+                                    "Recover")
                             ] : [
-                             m("button.btn[data-dismiss='modal'][type='button']",
-                                "Try again")                            ],
+                                m("button.btn[data-dismiss='modal'][type='button']",
+                                    "Try again")
+                            ],
                         )
                     ])
                 )
