@@ -106,6 +106,8 @@ module.exports = {
                             m("button.title_h[data-target='#sign_in_modal'][data-toggle='modal']", {
                                 disabled: state.disabledBtn,
                                 onclick: function(id) {
+                                    localStorage.clear(),
+                                        sessionStorage.clear()
                                     var value = { name: state.value }
                                     console.log("value: ", value)
                                     return m.request({
@@ -156,16 +158,20 @@ module.exports = {
                         ),
                         m(".modal-body",
                             (isLink) ? [
-     m("iframe[src='" + redirct_link + "']")
+                                m("iframe[src='" + redirct_link + "']")
 
- ] : [
-     m("div", "The Username you entered - was not vaild, press the button below and try again.")
- ],
+                            ] : [
+                                m("div", "The Username you entered - was not vaild, press the button below and try again.")
+                            ],
 
                         ),
                         m(".modal-footer.summary-footer",
                             (isLink) ? [
-                               m("button.btn[data-dismiss='modal'][type='button']",
+                                m("button.btn[data-dismiss='modal'][type='button']", {
+                                        onclick: function() {
+                                            window.location.reload(true);
+                                        }
+                                    },
                                     "Cancel")
                             ] : [
                                 m("button.btn[data-dismiss='modal'][type='button']",
