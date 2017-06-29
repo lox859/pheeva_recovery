@@ -4,6 +4,7 @@
   "description": "Pheeva Wallet Recovery Tool",
   "main": "gulpfile.js",
   "dependencies": {
+    "jquery": "^3.2.1",
     "mithril": "^1.1.1"
   },
   "devDependencies": {},

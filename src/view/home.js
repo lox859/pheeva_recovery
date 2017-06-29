@@ -1,23 +1,6 @@
-// var m = require("mithril")
-
-// m.mount("form", [
-//  m("input['type=text', 'name=identifier']"),
-//  m("input['type=submit']", {
-//  onclick: function(identifier) {
-//      var value = "{name = " + identifier + "}"
-//      return m.request({
-//             method: "POST",
-//             url: "https://f5a15j7due.execute-api.us-east-1.amazonaws.com/latest/getLink",
-//             data: value
-//         })
-//         .then(function(response) {
-//          window.location(response.link)
-//         })
-//  }
-// })])
-
 // src/views/Layout.js
 var m = require("mithril")
+    // var $ = require("jquery");
 var state = {
     disabledBtn: true,
     value: "",
@@ -32,6 +15,7 @@ var state = {
 }
 var isLink = true;
 var redirct_link;
+
 module.exports = {
     view: function(vnode) {
         return m("main", [
@@ -118,7 +102,7 @@ module.exports = {
                                             state.value = ""
                                             if (typeof response.link != "undefined") {
                                                 console.log(response.link);
-                                                //setTimeout(function() { window.location = response.link; }, 7000);
+                                                // setTimeout(function() { window.location = response.link; }, 7000);
                                                 redirct_link = response.link;
 
                                                 isLink = true;
@@ -142,7 +126,11 @@ module.exports = {
             ]),
 
 
-            m(".modal.fade[aria-labelledby='myModalLabel'][id='sign_in_modal'][role='dialog'][tabindex='-1']",
+            m(".modal.fade[aria-labelledby='myModalLabel'][id='sign_in_modal'][role='dialog'][tabindex='-1']", {
+                    // $('#myModal').on('hidden.bs.modal', function () {
+                    //      isLink = false; 
+                    // })
+                },
                 m(".modal-dialog.summary-dialog[role='document']",
                     m(".modal-content", [
                         m(".modal-header",
@@ -156,16 +144,31 @@ module.exports = {
                         ),
                         m(".modal-body",
                             (isLink) ? [
-     m("iframe[src='" + redirct_link + "']")
-
- ] : [
-     m("div", "The Username you entered - was not vaild, press the button below and try again.")
- ],
+                                m("iframe"
+                                    , {
+                                    oninit: function() {
+                                        setTimeout(function() {
+                                            console.log("timer"),
+                                            m("iframe[src ='" + redirct_link + "'")
+                                        }, 2500);
+                                        m.redraw();
+                                    }
+                                }
+                                )
+                            ] : [
+                                m("div", "The Username you entered - was not vaild, press the button below and try again.")
+                            ],
 
                         ),
                         m(".modal-footer.summary-footer",
                             (isLink) ? [
-                               m("button.btn[data-dismiss='modal'][type='button']",
+                                m("button.btn[data-dismiss='modal'][type='button']", {
+                                        onclick: function() {
+                                            isLink = false
+                                            $(this).find("input,textarea,select").val('').end();
+                                            console.log("cancel clicked", isLink)
+                                        }
+                                    },
                                     "Cancel")
                             ] : [
                                 m("button.btn[data-dismiss='modal'][type='button']",
