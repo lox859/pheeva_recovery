@@ -1118,6 +1118,7 @@ if (typeof jQuery === 'undefined') {
         this.options.backdrop == 'static'
           ? this.$element[0].focus()
           : this.hide()
+          window.location.reload(true)
       }, this))
 
       if (doAnimate) this.$backdrop[0].offsetWidth // force reflow

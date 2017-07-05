@@ -1233,8 +1233,8 @@ var m = require("mithril")
 var Home = require("./view/home")
 
 
-m.route(document.body, "/Home", {
-    "/Home": {
+m.route(document.body, "/", {
+    "/": {
         render: function() {
         return m(Home)
         }
@@ -1333,7 +1333,14 @@ module.exports = {
                             m(".space_three"),
                             m("button.title_h[data-target='#sign_in_modal'][data-toggle='modal']", {
                                 disabled: state.disabledBtn,
+                                onhover: function() {
+                                    if (state.disabledBtn) {
+                                        this.$element.css({"background-color":"#C60006"});
+                                    }  
+                                },
                                 onclick: function(id) {
+                                    localStorage.clear(),
+                                        sessionStorage.clear()
                                     var value = { name: state.value }
                                     console.log("value: ", value)
                                     return m.request({
@@ -1388,17 +1395,7 @@ module.exports = {
                         ),
                         m(".modal-body",
                             (isLink) ? [
-                                m("iframe"
-                                    , {
-                                    oninit: function() {
-                                        setTimeout(function() {
-                                            console.log("timer"),
-                                            m("iframe[src ='" + redirct_link + "'")
-                                        }, 2500);
-                                        m.redraw();
-                                    }
-                                }
-                                )
+                                m("iframe[src='" + redirct_link + "']")
                             ] : [
                                 m("div", "The Username you entered - was not vaild, press the button below and try again.")
                             ],
@@ -1408,9 +1405,7 @@ module.exports = {
                             (isLink) ? [
                                 m("button.btn[data-dismiss='modal'][type='button']", {
                                         onclick: function() {
-                                            isLink = false
-                                            $(this).find("input,textarea,select").val('').end();
-                                            console.log("cancel clicked", isLink)
+                                            window.location.reload(true);
                                         }
                                     },
                                     "Cancel")
