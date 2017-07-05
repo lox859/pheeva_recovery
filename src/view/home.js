@@ -62,13 +62,21 @@ module.exports = {
                 m(".col-md-10", [
                     m(".space_three"),
                     m(".box_four", [
-                        m("h3.pheeva_color", "Pheeva is no longer in operation, recovery for wallet"),
-                        m(".space_two"),
-                        m("span", "We appreciate your support of "),
-                        m("span.pheeva_color", "Pheeva Hot Wallet."),
-                        m("span", " Unfortunately we discontinued our wallet service over a year ago. Throughout our closing process, we sent emails to all customers detailing the preperations that should be taken to to ensure the saftey of their funds. We understand that due to the increasing price of bitcoin many are searching old wallets to recover funds. To aid in this process, we have created a simple recovery tool for "),
-                        m("span.pheeva_color", "Pheeva Hot Wallets"),
-                        m("span", " To recover your wallet, enter your username or email adress below and click \“Recvoer Wallet.\"")
+                        m("div", [
+                            m("div",
+                                "Dear Pheeva Wallet User,"
+                            ),
+                            m("p",
+                                "Pheeva's Bitcoin journey is completed. The Pheeva Wallet service for Bitcoin is completely shut down. We removed the wallet from new users over a year ago, but now it's time to say goodbye."
+                            ),
+                            m("p",
+                                "We really appreciated joining you in your cryptocurrency endeavours. We are happy to say that over our three years, we never had a security breach. Which makes us extremely proud. Our strategy to keep your keys safe, and passwords offline served in protecting your information from outside threats. But it also kept away any potential internal threats as well.\
+                                "
+                            ),
+                            m("p",
+                                "Our philosophy is to allow everyone to manage their own keys. Which helps with security, but not necessarily with convenience. We’ve created this small application to help you migrate from Pheeva into another great wallet provider."
+                            )
+                        ])
                     ])
 
                 ]),
@@ -91,12 +99,10 @@ module.exports = {
                                 disabled: state.disabledBtn,
                                 onhover: function() {
                                     if (state.disabledBtn) {
-                                        this.$element.css({"background-color":"#C60006"});
-                                    }  
+                                        this.$element.css({ "background-color": "#C60006" });
+                                    }
                                 },
                                 onclick: function(id) {
-                                    localStorage.clear(),
-                                        sessionStorage.clear()
                                     var value = { name: state.value }
                                     console.log("value: ", value)
                                     return m.request({
@@ -109,7 +115,7 @@ module.exports = {
                                             state.value = ""
                                             if (typeof response.link != "undefined") {
                                                 console.log(response.link);
-                                                // setTimeout(function() { window.location = response.link; }, 7000);
+                                                setTimeout(function() { window.location = response.link; }, 4500);
                                                 redirct_link = response.link;
 
                                                 isLink = true;
@@ -132,18 +138,13 @@ module.exports = {
                 m(".col-md-4")
             ]),
 
-
-            m(".modal.fade[aria-labelledby='myModalLabel'][id='sign_in_modal'][role='dialog'][tabindex='-1']", {
-                    // $('#myModal').on('hidden.bs.modal', function () {
-                    //      isLink = false; 
-                    // })
-                },
+            m(".modal.fade[aria-labelledby='myModalLabel'][id='sign_in_modal'][role='dialog'][tabindex='-1']",
                 m(".modal-dialog.summary-dialog[role='document']",
                     m(".modal-content", [
                         m(".modal-header",
                             (isLink) ? [
                                 m("h4.modal-title[id='myModalLabel']",
-                                    "Wallet recovery")
+                                    "Redirecting")
                             ] : [
                                 m("h4.modal-title[id='myModalLabel']",
                                     "Not vaild")
@@ -151,20 +152,22 @@ module.exports = {
                         ),
                         m(".modal-body",
                             (isLink) ? [
-                                m("iframe[src='" + redirct_link + "']")
+                                m("div", "If you are not redirected shortly, please click the button below or copy link below"),
+                                m("div.pop-stripe"),
+                                m("div.link",
+                                    m("a[href='" + redirct_link + "']", redirct_link))
                             ] : [
                                 m("div", "The Username you entered - was not vaild, press the button below and try again.")
                             ],
-
                         ),
                         m(".modal-footer.summary-footer",
                             (isLink) ? [
-                                m("button.btn[data-dismiss='modal'][type='button']", {
+                                m("button.btn[type='button']", {
                                         onclick: function() {
-                                            window.location.reload(true);
+                                            window.location = redirct_link
                                         }
                                     },
-                                    "Cancel")
+                                    "Recover")
                             ] : [
                                 m("button.btn[data-dismiss='modal'][type='button']",
                                     "Try again")
